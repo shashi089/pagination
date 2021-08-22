@@ -2,21 +2,21 @@ var userData; // data to be retrieved from the json file
 // read JSON file
 function readTextFile(file, callback) {
   var rawFile = new XMLHttpRequest();
-  rawFile.overrideMimeType('application/json');
-  rawFile.open('GET', file, true);
+  rawFile.overrideMimeType("application/json");
+  rawFile.open("GET", file, true);
   rawFile.onreadystatechange = function () {
-    if (rawFile.readyState === 4 && rawFile.status == '200') {
+    if (rawFile.readyState === 4 && rawFile.status == "200") {
       callback(rawFile.responseText);
     }
   };
   rawFile.send(null);
 }
 
-readTextFile('./user.json', function (data) {
+readTextFile("./user.json", function (data) {
   userData = JSON.parse(data);
 });
 
-var oldPage = 0;
+var currentPage = 0; //  page count
 
 // To display records
 
@@ -31,8 +31,8 @@ function displayPage(pageNum) {
 
   // To create data table
   function createUser(pageWiseUserData, i) {
-    const info = document.createElement('tr');
-    var outputTable = document.getElementById('userdetails');
+    const info = document.createElement("tr");
+    var outputTable = document.getElementById("userdetails");
     info.innerHTML = `
      
       <td>${pageWiseUserData[i].id}</td>
@@ -45,28 +45,28 @@ function displayPage(pageNum) {
 }
 
 // To get page Number
-document.querySelector('ul').onclick = function (e) {
+document.querySelector("ul").onclick = function (e) {
   var pageNum = e.target.textContent;
   console.log(pageNum);
-  var acheck = document.querySelector('ul li a.active'); // to check active Page Number
+  var acheck = document.querySelector("ul li a.active"); // to check active Page Number
   if (acheck) {
-    document.querySelector('ul li a.active').classList.remove('active');
+    document.querySelector("ul li a.active").classList.remove("active");
   }
-  e.target.classList.add('active');
+  e.target.classList.add("active");
 
-  var outputTable = document.getElementById('userdetails');
-  outputTable.innerHTML = ''; // to empty the table
+  var outputTable = document.getElementById("userdetails");
+  outputTable.innerHTML = ""; // to empty the table
   // First Page
-  if (pageNum === 'First') {
+  if (pageNum === "First") {
     pageNum = 1;
   }
   // Next Page
-  else if (pageNum === 'Next') {
-    pageNum = oldPage + 1;
+  else if (pageNum === "Next") {
+    pageNum = currentPage + 1;
   }
   if (pageNum > 10) {
     pageNum = 1;
   }
-  oldPage = +pageNum;
+  currentPage = +pageNum;
   displayPage(pageNum);
 };
