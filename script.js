@@ -1,3 +1,38 @@
+var header = document.createElement("h2");
+header.innerHTML = "Click on Page Numbers";
+
+document.body.append(header);
+
+var info = document.createElement("div");
+info.className = "pagination";
+
+info.innerHTML = `<div>
+<ul>
+  <li><a href="#">First</a></li>
+  <li><a href="#">Next</a></li>
+  <li><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">7</a></li>
+  <li><a href="#">8</a></li>
+  <li><a href="#">9</a></li>
+  <li><a href="#">10</a></li>
+</ul>
+</div>
+<table id="userTable">
+<tr>
+  <th>S.No</th>
+  <th>Name</th>
+  <th>Email</th>
+</tr>
+<tbody id="userdetails"></tbody>
+</table>
+`;
+document.body.append(info);
+
 var userData; // data to be retrieved from the json file
 // read JSON file
 function readTextFile(file, callback) {
